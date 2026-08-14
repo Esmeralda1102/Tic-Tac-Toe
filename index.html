@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+    <title>Tic Tac Toe</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="aplicacion">
+
+        <section id="pantalla-carga" class="pantalla pantalla-activa">
+
+            <div class="contenedor-carga">
+
+                <h1 class="titulo-carga">LOADING</h1>
+
+                <div class="barra-progreso">
+                    <div id="relleno-progreso" class="relleno-progreso"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="pantalla-menu" class="pantalla">
+
+            <div class="panel panel-menu">
+
+                <h1 class="titulo-juego">Tic Tac Toe</h1>
+
+                <button class="boton boton-celeste" id="boton-cpu">
+                    JUGADOR VS CPU
+                </button>
+
+                <button class="boton boton-naranja" id="boton-jugadores">
+                    JUGADOR VS JUGADOR
+                </button>
+
+                <button class="boton boton-vacio oculto" id="boton-continuar">
+                    REANUDAR PARTIDA
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section id="pantalla-nombres" class="pantalla">
+
+            <div class="panel panel-nombres">
+
+                <h2 class="titulo-panel" id="titulo-nombres">
+                    NOMBRAR JUGADORES
+                </h2>
+
+                <input
+                    type="text"
+                    id="nombre-jugador1"
+                    class="campo-nombre"
+                    placeholder="Jugador 1"
+                    maxlength="12"
+                >
+
+                <input
+                    type="text"
+                    id="nombre-jugador2"
+                    class="campo-nombre"
+                    placeholder="Jugador 2"
+                    maxlength="12"
+                >
+
+                <button class="boton boton-naranja" id="boton-iniciar">
+                    INICIAR
+                </button>
+
+            </div>
+
+        </section>
+
+        <section id="pantalla-juego" class="pantalla">
+
+            <div class="barra-superior">
+
+                <button
+                    class="boton-icono boton-icono-naranja"
+                    id="boton-volver"
+                    title="Volver al menú"
+                    aria-label="Volver"
+                >
+
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M15 5l-7 7 7 7"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+
+                </button>
+
+
+                <div class="jugadores-vs">
+
+                    <div class="jugador">
+
+                        <div class="avatar" id="avatar-jugador1">
+
+                            <span id="marca-jugador1">
+                                X
+                            </span>
+
+                        </div>
+
+                        <span
+                            class="nombre-jugador"
+                            id="nombre-mostrar-jugador1"
+                        >
+                            Jugador 1
+                        </span>
+
+                    </div>
+
+
+                    <span class="texto-vs">
+                        VS
+                    </span>
+
+                    <div class="jugador">
+
+                        <div
+                            class="avatar avatar-o"
+                            id="avatar-jugador2"
+                        >
+
+                            <span id="marca-jugador2">
+                                O
+                            </span>
+
+                        </div>
+
+                        <span
+                            class="nombre-jugador"
+                            id="nombre-mostrar-jugador2"
+                        >
+                            CPU
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="boton-icono boton-icono-celeste"
+                    id="boton-reiniciar"
+                    title="Reiniciar partida"
+                    aria-label="Reiniciar"
+                >
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M4 4v6h6M20 20v-6h-6M4.5 15a8 8 0 0013.9 3.4M19.5 9A8 8 0 005.6 5.6"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <div class="tarjeta-tablero">
+
+                <div class="fila-puntuacion">
+
+                    <div class="columna-puntuacion">
+
+                        <span
+                            class="etiqueta-puntuacion"
+                            id="etiqueta-puntos-jugador1"
+                        >
+                            JE
+                        </span>
+
+                        <span
+                            class="valor-puntuacion"
+                            id="puntos-jugador1"
+                        >
+                            0 GANADAS
+                        </span>
+
+                    </div>
+
+                    <div class="columna-puntuacion">
+
+                        <span
+                            class="etiqueta-puntuacion"
+                            id="etiqueta-puntos-jugador2"
+                        >
+                            CPU
+                        </span>
+
+                        <span
+                            class="valor-puntuacion"
+                            id="puntos-jugador2"
+                        >
+                            0 GANADAS
+                        </span>
+
+                    </div>
+
+
+                    <div class="columna-puntuacion">
+
+                        <span class="etiqueta-puntuacion">
+                            ⚖
+                        </span>
+
+                        <span
+                            class="valor-puntuacion"
+                            id="puntos-empates"
+                        >
+                            0 EMPATES
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="tablero" id="tablero">
+
+                    <button class="casilla" data-indice="0"></button>
+                    <button class="casilla" data-indice="1"></button>
+                    <button class="casilla" data-indice="2"></button>
+                    <button class="casilla" data-indice="3"></button>
+                    <button class="casilla" data-indice="4"></button>
+                    <button class="casilla" data-indice="5"></button>
+                    <button class="casilla" data-indice="6"></button>
+                    <button class="casilla" data-indice="7"></button>
+                    <button class="casilla" data-indice="8"></button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="fondo-modal oculto"
+                id="modal-resultado"
+            >
+
+                <div class="ventana-modal">
+
+                    <div
+                        class="icono-modal"
+                        id="icono-resultado"
+                    ></div>
+
+
+                    <h2
+                        class="titulo-modal"
+                        id="titulo-resultado"
+                    >
+                        VICTORIA
+                    </h2>
+
+
+                    <p
+                        class="mensaje-modal"
+                        id="mensaje-resultado"
+                    >
+                        Jugador 1
+                    </p>
+
+
+                    <div class="fila-puntuacion fila-modal">
+
+                        <div class="columna-puntuacion">
+
+                            <span
+                                class="etiqueta-puntuacion"
+                                id="modal-etiqueta-jugador1"
+                            >
+                                JE
+                            </span>
+
+                            <span
+                                class="valor-puntuacion"
+                                id="modal-puntos-jugador1"
+                            >
+                                0 GANADAS
+                            </span>
+
+                        </div>
+
+
+                        <div class="columna-puntuacion">
+
+                            <span
+                                class="etiqueta-puntuacion"
+                                id="modal-etiqueta-jugador2"
+                            >
+                                CPU
+                            </span>
+
+                            <span
+                                class="valor-puntuacion"
+                                id="modal-puntos-jugador2"
+                            >
+                                0 GANADAS
+                            </span>
+
+                        </div>
+
+
+                        <div class="columna-puntuacion">
+
+                            <span class="etiqueta-puntuacion">
+                                ⚖
+                            </span>
+
+                            <span
+                                class="valor-puntuacion"
+                                id="modal-puntos-empates"
+                            >
+                                0 EMPATES
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="acciones-modal">
+
+                        <button
+                            class="boton boton-naranja boton-mitad"
+                            id="boton-salir"
+                        >
+                            SALIR
+                        </button>
+
+                        <button
+                            class="boton boton-celeste boton-mitad"
+                            id="boton-siguiente"
+                        >
+                            PRÓXIMO ROUND
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="fondo-modal oculto"
+                id="modal-confirmar"
+            >
+
+                <div class="ventana-modal ventana-confirmar">
+
+                    <p class="texto-confirmar">
+                        ¿Seguro que desea reiniciar la partida?
+                    </p>
+
+
+                    <div class="acciones-modal">
+
+                        <button
+                            class="boton boton-naranja boton-mitad"
+                            id="boton-cancelar-reinicio"
+                        >
+                            CANCELAR
+                        </button>
+
+                        <button
+                            class="boton boton-celeste boton-mitad"
+                            id="boton-confirmar-reinicio"
+                        >
+                            REINICIAR PARTIDA
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
